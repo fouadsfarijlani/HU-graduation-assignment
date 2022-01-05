@@ -1,0 +1,41 @@
+{% extends "Material_Classifier/base.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class = "contain">
+    <div class = "container">
+     <img src="{{ image_taken_path }}" class = "img-fluid mx-auto d-block" width="200" height="200">
+     <div class = "container mt-2">
+         <form class = "form-control" method = "POST">
+            {% csrf_token %} 
+            <small class = "mt-2 mb-2">Kindly choose the category of the item in the picture:</small>
+             <select class = "form-select mb-2" name = "materia-selection">
+                 <option selected>Plastic Bottle</option>
+                 <option>Plastic Bag</option>
+                 <option>Plastic Round Container</option>
+                 <option>Plastic Box</option>
+                 <option>Glass Bottle</option>
+                 <option>Glass Cup</option>
+                 <option>Paper</option>
+                 <option>Cardboard</option>
+                 <option>Metal Can</option>
+                 <option>Drinking Carton</option>
+                 <option>Chips Bag</option>
+                 <option>Organic</option>
+             </select>
+             <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name = "user-authorisation-for-image-reuse">
+                    <label class="form-check-label" for="flexSwitchCheckDefault"><small class= "text-muted">Allow this image to be used by MyRecycleFriend</small></label>
+            </div>
+            <div class = "small mt-2 mb-2">by checking the above box you are providing permission for us to use this image to improve the accuracy of the results.</div>
+            <button class="btn btn-outline-success me-auto" type="submit">
+                Save Results
+            </button>
+            <a class="btn btn-outline-danger ms-auto" name="cancel" value = "Cancel" href = "{% url 'classifier-results' %}">Cancel</a>
+         </form>
+     </div>
+    </div>
+</div>
+
+{% endblock content %}

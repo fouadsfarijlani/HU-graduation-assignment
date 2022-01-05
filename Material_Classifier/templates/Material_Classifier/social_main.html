@@ -1,0 +1,110 @@
+{% extends "Material_Classifier/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<ul class="nav nav-pills xs-3 d-flex justify-content-center" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="news-feed-tab" data-bs-toggle="pill" data-bs-target="#news-feed" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+            News Feed
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="inquieries-tab" data-bs-toggle="pill" data-bs-target="#inquieries" type="button" role="tab" aria-controls="pills-home" aria-selected="false">
+            Inquieries
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="useful-links-tab" data-bs-toggle="pill" data-bs-target="#useful-links" type="button" role="tab" aria-controls="pills-home" aria-selected="false">
+            Useful Links
+        </button>
+    </li>
+</ul>
+
+
+<div class = "tab-content pt-5 mt-1" id = "pills-tabContent">
+    <div class="tab-pane fade show active" id="news-feed" role="tabpanel" aria-labelledby="pills-news-feed-tab">
+
+        <form class = "form-control" method = "POST">
+            {% csrf_token %} 
+            <select class="form-select" aria-label="Chart Selection" name = "region-selection">
+                <option selected>Select updates you would like to see</option>
+                <option>{{user.profile.city_of_residence}}</option>
+                <option>National Updates</option>
+            </select>
+            <button class="btn btn-success mt-2" type = "submit">Filter</button>
+        </form>
+
+        {% for item in user_news_feed %}
+            <div class = "flex-grow-1 ms-3 p-2">
+                {% if item.is_governmental %}
+                    <div class = "d-flex">
+                        <h5 class = "mt-0"" style="color: #FF8C00;">{{ item.title }}</h5>
+                    </div>
+                {% elif item.is_event%}
+                    <div class = "d-flex">
+                        <h5 class = "mt-0"" style="color: #228B22;">{{ item.title }}</h5>
+                    </div>
+                {% else %}
+                        <div class = "d-flex">
+                            <h5 class = "mt-0">{{ item.title }}</h5>
+                        </div>
+                {% endif %}
+                    <div class = "border-top border-success border-2 pt-2">
+                        <p> {{item.content}} </p>
+                        <div class = "text-end">
+                            <small class = "text-muted">{{item.date_posted}} {{item.region}}</small>
+                        </div>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class = "tab-pane fade" id = "inquieries" role = "tabpanel" aria-labelledby="inquieries-tab">
+        {% for inquiery in inquieries %}
+            <div class = "contaier pt-2">
+                <div class = "card">
+                    <h5 class = "card-title">{{ inquiery.inquery_title }}</h5>
+                    <div class = "border-top pt-1">
+                        {% if inquiery.is_open %}
+                            <p class = "small text-start" style="color: #228B22;">Open</p>
+                        {% else %}
+                            <p class = "small text-start text-muted">Closed</p>
+                        {% endif %}
+                    </div>
+                    <p class = "card-text pb-2">{{ inquiery.inquery_content }}</p>
+                    <p class = "small text-end text-muted">Posted on {{ inquiery.inquery_post_date }}</p>
+                    <div class = "mb-3">
+                        <label class = "form-label">Write your answer:</label>
+                        <textarea class="form-control" rows="2"></textarea>
+                        {% if inquiery.is_open %}
+                            <button class = "btn btn-success float-end me-2 mt-2">Submit</button>
+                        {% else %}
+                            <button class = "btn btn-success float-end me-2 mt-2" disabled>Submit</button>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class = "tab-pane fade" id = "useful-links" role = "tabpanel" aria-labelledby="useful-links-tab">
+        <div class = "border-top mt-2">
+            <small class = "lead">Use the below links to get more information about waste management and recycling in {{user.profile.city_of_residence}}</small>
+               
+            {% for links in useful_links %} 
+                <li class = "mt-3"> 
+                    <small>Link to the municipality of {{user.profile.city_of_residence}} can be found <a href="{{links.municipality_link}}" class = "ml-2">Here</a></small>
+                </li>
+                <li class = "mt-3"> 
+                    <small>Link to the Dutch government official waste managemnet can be found <a href="{{links.extra_link_1}}" class = "ml-2">Here</a></small>
+                </li>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+
+
+
+{% endblock content %}

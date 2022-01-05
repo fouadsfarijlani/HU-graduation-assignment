@@ -1,0 +1,68 @@
+
+{% extends "Material_Classifier/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+
+    <div class="row g-2">
+      <div class="col-6" >
+        <div class="p-0 border bg-light" >
+            <img src="{% static '/Material_Classifier/media/identifying-items-thumbnail.jpg' %}" class="img-fluid" alt="...">
+            <a class = "btn btn-success text-nowrap w-100" href = "{% url 'classifier-page' %}">
+                 <p class = "text-center">Identify Items</p>
+            </a>
+        </div>
+    </div>
+
+      <div class="col-6">
+        <div class="p-0 border bg-light">
+            <img src="{% static '/Material_Classifier/media/check-progress-thumbnail.jpg' %}" class="img-fluid" alt="...">
+            <a class= "btn btn-success text-nowrap w-100"  href = "{% url 'progress-main' %}">
+                <p class = "text-center">Check progress</p>
+            </a>
+    </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="p-0 border bg-light">
+            <img src="{% static '/Material_Classifier/media/incentive-thumbnail.jpg' %}" class="img-fluid" alt="...">
+              <a class= "btn btn-success text-nowrap w-100"  href = "{% url 'incentive-main-page' %}">
+                  <p class = "text-center">Rewards</p>
+              </a>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-0 border bg-light">
+          <img src="{% static '/Material_Classifier/media/social-communication-thumbnail.jpg' %}" class="img-fluid" alt="...">
+          <a class= "btn btn-success text-nowrap w-100"  href = "{% url 'social-main-page' %}">
+              <p class = "text-center">Social</p>
+          </a>
+        </div>
+      </div>
+
+  </div>
+
+  <nav class="navbar fixed-bottom navbar-light bg-light" >
+    <div class = "container-fluid">
+        <ul class ="nav me-auto">
+            <li class="nav-item">
+              <a class="btn btn-outline-success" aria-current="page" href="{% url 'useful-locations-page' %}"> 
+                <i class="bi bi-recycle"></i> Useful Locations</a>
+              </li>
+        </ul>
+        <ul class = "nav ms-auto">
+            <li class="nav-item me-auto">
+              <a class="btn btn-outline-success" aria-current="page" href="{% url 'settings-page' %}"> 
+                <i class="bi bi-gear"></i> Settings</a>
+              </li>
+        </ul>
+    </div>
+</nav>  
+</body>
+
+
+</body>
+{% endblock content %}

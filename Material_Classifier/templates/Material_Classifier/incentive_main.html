@@ -1,0 +1,36 @@
+{% extends "Material_Classifier/base.html" %}
+{% block content %}
+{% load static %}
+
+
+
+<div class = "container">
+    <h6 class = "text-muted">Use your waste segragation progress and exchange it for discounts with various discount vouchers</h6>
+</div>
+
+{% for offer in incentive_offers %}
+<form method = "POST" class = "form-control">
+    {% csrf_token %} 
+    <div class = "container pt-2">
+        <div class = "card">
+            <img src = "{{ offer.offer_image_path }}" class="img-fluid">
+            <div class = "card-body">
+                <h5 class = "card-title text-center" name = "offer-title">{{ offer.offer_title }}</h5>
+                <div class = "border-top pt-1">
+                    <p class = "small text-start text-muted">{{ offer.offer_type }}</p>
+                    <small class = "text-muted float-start pb-3">Offer starts on {{ offer.offer_date_start }} and last until {{ offer.offer_date_end }}</small>
+                </div>
+                <p class = "card-text pb-2">{{ offer.offer_content }}</p>
+
+                    <button class="btn btn-outline-success ms-auto" type="submit">Claim</button>
+            </div>
+            </div>
+        </div>
+    </form>
+        
+    {% endfor %}
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "Material_Classifier/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class = "container">
+    <p class = "h6">You can locate recycling centers to disopse your items. You can also donate products that you are not using anymore to charities.<br>If you dont need it others might</p>
+</div>
+<form class = "form-control mt-2" method = "POST">
+    {% csrf_token %}
+    <p class = "h6">What are you looking for?</p>
+    <select class="form-select" aria-label="Default select example" name = "location-selection">
+        <option selected>Select an option</option>
+        <option value="1">Recycling centers</option>
+        <option value="2">Charities</option>
+    </select>
+    <div class = "text-end mt-2">
+        <button class = "btn btn-success" type = "submit">Search</button>
+    </div>
+</form>
+<div class = "container mt-2">
+    {% if option_selected == "1"%}
+        <p>Map below shows the recycling centers around you.</p>
+        <img src="{% static '/Material_Classifier/media/nl-map.jpeg' %}" class="img-fluid" alt="...">
+    {%elif option_selected == "2"%}
+        <p>Map below shows the charities and donation centers around you.</p>
+        <img src="{% static '/Material_Classifier/media/nl-map.jpeg' %}" class="img-fluid" alt="..."> 
+    {% endif %}
+</div>
+{% endblock content %}

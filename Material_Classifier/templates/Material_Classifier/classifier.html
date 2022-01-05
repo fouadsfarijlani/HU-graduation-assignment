@@ -1,0 +1,45 @@
+{% extends "Material_Classifier/base.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+  <body>
+    <div class = "container">
+      <div class = "container">
+        <img src="{% static '/Material_Classifier/media/identify-items-image-01.jpg' %}" class="card-img-top" alt="...">
+      </div>
+       <div class = "container">
+         <div class="mt-2 col-md-12">
+          <p class = "h6">Use your phone camera to take a picture or upload an image of an item to identify where it should be disposed.</p>
+         </div>
+      </div>
+      <div class = "container">
+            <form method="POST" enctype="multipart/form-data" class = "form-control">
+              <label>upload your image</label>
+                {% csrf_token %} 
+                {{ form|crispy }}
+                  <input type = "submit" value = "Submit" class="btn btn-outline-success" href="{% url 'about-page' %}">
+              </form>
+            </div>
+
+              
+              
+
+          <!--input type="file" accept="image/*" capture = "camera">
+          </form>
+        {% if pred == ""%}
+            <h3>No item selected</h3>
+        {% elif pred != "" %}
+            <h3>{{ pred }}</h3>
+        {% endif %}-->
+
+      </div>
+
+ 
+
+
+  </body>
+{% endblock content %}
+</div>

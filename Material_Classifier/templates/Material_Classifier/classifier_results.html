@@ -1,0 +1,52 @@
+{% extends "Material_Classifier/base.html" %}
+{% block content %}
+{% load static %}
+
+{% if prediction_results == "Drinking Carton" %}
+    <div class="alert alert-success" role="alert">
+        You can always save the lids of drinking cartons and use them for charity
+    </div>
+{% elif prediction_results == "Plastic Bag" %}
+    <div class="alert alert-success" role="alert">
+        You can always always re-use plastic bags. Do not dispose them unless you really have to 
+    </div>
+{% elif prediction_results == "Glass Bottle" %}
+    <div class="alert alert-success" role="alert">
+        You can always exchange glass bottles for money ;) check in locations to view your nearest recycling center 
+    </div>
+{% endif %}
+<div class = "contain">
+    <div class = "container">
+     <img src="{{ image_taken_path }}" class = "img-fluid mx-auto d-block" width="200" height="200">
+     <div class = "container">
+         <div class = "mt-2 col-md-12">
+             <div class = "container border">
+            <h5>Results:</h5>
+            <p>Item is identified as {{ prediction_results }} and shoud be disposed in: <stong class = "h6"style="color: #FF0000;">{{ disposal_bin }}</stong></p>
+            <p class = "small text-muted">*Disposal method is show based on the municipality of {{user.profile.city_of_residence}}</p>
+         </div>
+         </div>
+         <div class = "mt-2 col-md-12">
+         <div class = "container">
+             <form method = "POST" class = "form-control">
+                {% csrf_token %} 
+             <div class = "row">
+                 <div class = "col">
+                    <input type="submit"  Value = "Save" class="btn btn-outline-secondary btn-lg text-nowrap">
+                 </div>
+                 <div class = "col">
+                    <a  class="btn btn-outline-danger btn-lg text-nowrap" href="{% url 'classifier-non-correct-results' %}">Not Correct</a>
+                 </div>
+             </div>
+            </form>
+         </div>
+        </div>
+        </div>
+     </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

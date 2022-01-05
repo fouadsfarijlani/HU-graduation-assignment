@@ -1,0 +1,57 @@
+{% extends "Material_Classifier/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<h4 class = "border-bottom p-2">Settings</h4>
+<div class = "container">
+    <div class = "form-control">
+        <p class = "lead">Location Services</p>
+        <p>This option allows MyRecycleManager to access to location while using it.</p>
+        <small class = "text-muted">Location service enables MyRecycleManager to dynamically identify where to dispose your waste based on the municipality jurisdiction.</small>
+        <div class="form-check form-switch pt-2">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Turn on location services</label>
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        </div>
+        <p class = "lead mt-2">Personalized Rewards</p>
+        <p>By enabeling personalized rewards and filling the preferences you allow MyRecycleManager to provide you with rewards based on your liking</p>
+        <small class = "text-muted">Data about your preferences are stored as long as you have enable the Personalized Rewards option. <strong> MyRecycleManager does not store data that leads to you directly. If you decide to turn it off then all of your data will be deleted immediatly. </strong></small>
+        <div class="form-check form-switch pt-2">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Turn on Personalized Rewards</label>
+            <input class="form-check-input" type="checkbox" id="personalization-checkbox" data-bs-toggle="collapse" data-bs-target="#personalization-tab" role="button" aria-expanded="false" aria-controls="personalization-tab">
+        </div>
+        <div class = "collapse" id = "personalization-tab">
+            <form class = "form-control" method = "POST">
+                {% csrf_token %} 
+            <p>Please fill in the below information</p>
+            <p class = "small">All of the rewards recieved are from sustainable business. Saving the environment does not end at separating waste.</p>
+            <p>What type of food offers do you prefer?</p>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Select an option</option>
+                <option value="1">Spicy</option>
+                <option value="2">Eastern</option>
+                <option value="3">Fatty</option>
+                <option value="4">I like all food</option>
+              </select>
+              <p>What type of clothings do you prefer?</p>
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Select an option</option>
+                <option value="1">Formal</option>
+                <option value="2">Casual</option>
+                <option value="3">Hippy</option>
+                <option value="4">I like all clothings</option>
+              </select>
+              <p>You prefer getting groceries discounts from?</p>
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Select an option</option>
+                <option value="1">Small local shops</option>
+                <option value="2">Large retail shops</option>
+                <option value="4">I like both</option>
+              </select>
+              <button class = "btn btn-outline-success mt-2" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+ </div>
+
+{% endblock content %}

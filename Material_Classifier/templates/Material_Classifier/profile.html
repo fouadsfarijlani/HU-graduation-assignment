@@ -1,0 +1,20 @@
+{% extends "Material_Classifier/base.html" %}
+{% block content %}
+{% load static %}
+
+    <div class = "content-section">
+        <div class = "media">
+                <div class = "media-body">
+                    <h2 class = "account-heading">{{user.username}}</h2>
+                    <p class = "text-secondary">{{ user.first_name }} {{ user.last_name }}</p>
+                    <p class = "text-secondary">{{ user.email }}</p>
+                    <p class = "text-secondary">{{ user.profile.address_line_1 }}</p>
+                    <p class = "text-secondary">{{ user.profile.address_line_2 }}</p>
+                    <p class = "text-secondary">{{ user.profile.city_of_residence }}</p>
+                    <p class = "text-secondary">{{ user.profile.zip_code }}</p>
+
+                </div>
+            </div>
+    </div>
+
+{% endblock content %}
